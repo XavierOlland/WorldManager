@@ -75,23 +75,23 @@ a.right:active { color:#484848; text-decoration:underline bold; font-family: gui
 
 table {border: 0px ; margin:0px;}
 table.right {float:right; border: 0px ; margin:0px;}
-th {height : 20px; border: 0px ; padding: 3px; background-color:rgba(50, 55, 55, 0.25); font-family: guildTitle; color:#484848; font-size:16px; vertical-align:center;}
-tr {height : 20px; border: 0px ; padding: 3px; vertical-align:center; }
-tr.center { height : 20px; border: 0px ; vertical-align:center;}
+th {height : 20px; border: 0px ; padding: 3px; background-color:rgba(50, 55, 55, 0.25); font-family: guildTitle; color:#484848; font-size:16px; vertical-align:middle;}
+tr {height : 20px; border: 0px ; padding: 3px; vertical-align:middle; }
+tr.center { height : 20px; border: 0px ; vertical-align:middle; text-align:center;}
 tr.top {height : 20px; border: 0px ; vertical-align:top; }
-td {border: 0px; padding: 3px; font-family: guildText; font-size:16px; vertical-align:center; text-align:left;}
-td.colorbg {border: 0px; padding: 3px; font-family: guildText; font-size:16px; vertical-align:center; text-align:left;}
-td.center {border: 0px; padding: 3px; font-family: guildText; font-size:16px; vertical-align:center; text-align:center;}
+td {border: 0px; padding: 3px; font-family: guildText; font-size:16px; vertical-align:middle; text-align:left;}
+td.colorbg {border: 0px; padding: 3px; font-family: guildText; font-size:16px; vertical-align:middle; text-align:left;}
+td.center {border: 0px; padding: 0px; font-family: guildText; font-size:16px; vertical-align:middle; text-align:center;}
 td.bottom { border: 0px; padding: 3px; font-family: guildText; font-size:16px; vertical-align:bottom; text-align:right; }
-td.result { border: 0px; padding: 3px; font-family: guildTitle; font-size:16px; vertical-align:center; text-align:left; }
-td.calendar {border: 0px; padding: 3px; font-family: guildText; font-size:16px; vertical-align:center; text-align:center;}
-td.fade {border: 0px; padding: 3px; font-family: guildText; font-size:16px; vertical-align:center; text-align:center; color:rgba(0, 0, 0, 0.3)}
-tr.footer {height : 20px; border: 0px ; padding: 3px; background-color:rgba(50, 55, 55, 0.15); font-family: guildTitle; color:#484848; font-size:16px; vertical-align:center; text-align:center;}
+td.result { border: 0px; padding: 3px; font-family: guildTitle; font-size:16px; vertical-align:middle; text-align:left; }
+td.calendar {border: 0px; padding: 3px; font-family: guildText; font-size:16px; vertical-align:middle; text-align:center;}
+td.fade {border: 0px; padding: 3px; font-family: guildText; font-size:16px; vertical-align:middle; text-align:center; color:rgba(0, 0, 0, 0.3)}
+tr.footer {height : 20px; border: 0px ; padding: 3px; background-color:rgba(50, 55, 55, 0.15); font-family: guildTitle; color:#484848; font-size:16px; vertical-align:middle; text-align:center;}
 
 table.menu { border:1px; }
-th.menu {vertical-align:center;}
-tr.menu {vertical-align:center; }
-td.menu {font-family: guildText; padding-left: 10px; padding-right: 10px; vertical-align:center;}
+th.menu {vertical-align:middle;}
+tr.menu {vertical-align:middle; }
+td.menu {font-family: guildText; padding-left: 10px; padding-right: 10px; vertical-align:middle;}
 
 	table.tablesorter thead tr .header { padding-right: 10px;
 	background-image: url(images/ts_bg.png);
@@ -131,7 +131,7 @@ div#Left { position:inherit; float:left; padding:0px; margin:0px; padding:0px; w
 div#Page { position:inherit;float:left; clear: right; padding:0px; margin:0px; width:930px; min-height:305px; z-index: -1; line-height:100%; display:inline-block; }
   div#Core { float:left; margin:5px; padding:5px; width:710px; min-height:471px; background-color:rgba(255,255,255,0.5); border-radius:5px; border-style:solid;border-color:#606060;border-width:1px; z-index: 1; }
 	div#Event { float:left;padding-left:35px; width:350px; }
-	div.extand { position:relative; float:left; margin:0px; padding:0px; width:auto; z-index: 2; }
+	div.extand { position:block; float:left; margin:0px; padding:0px; width:auto; z-index: 2; }
   div#Right { float:left; margin:5px; margin-left:0px; padding:5px; width:180px; min-height:471px; background-color:rgba(255,255,255,0.5); border-radius:5px; border-style:solid;border-color:#606060;border-width:1px; z-index: 1; }
   div#CoreFull { float:left; margin:5px; padding:5px; width:908px; min-height:471px; background-color:rgba(255,255,255,0.5); border-radius:5px; border-style:solid;border-color:#606060;border-width:1px; z-index: 1; }
 
@@ -146,19 +146,36 @@ div#PageBO { position:inherit;float:left; clear: right; padding:0px; margin:0px;
   div#CoreBO { float:left; margin:5px; padding:5px; width:838px; min-height:397px; background-color:rgba(255, 255, 255, 0.5); border-radius:5px; border-style:solid;border-color:#606060;border-width:1px; z-index: 1; }
   div#ExtandBO { position:relative; float:left; margin:0px; padding:0px; width:auto; z-index: 2; }
 
-.day_container { position:relative;float:left; display:table; width:106px; margin:1px;height:auto;}
-.day_line { display:table; position:relative; float:left; width:106px; max-height:52px; text-align: center;}
-.day_cube { background:#ff0000;display:table-cell;  width:52px; height:52px; margin:1px; text-align: center;vertical-align: middle; overflow: hidden;}
-.sq_red   { display:table-cell; position:relative; margin:15px; background:rgba(155,0,0,0.5); color:#fdfdfd; text-align: center; vertical-align: middle;}
-.sq_green { display:table-cell; position:relative; margin:15px; background:rgba(0,100,0,0.5); color:#fdfdfd; text-align: center; vertical-align: middle;}
-.sq_blue  { display:table-cell; position:relative; margin:15px; background:rgba(0,55,255,0.5); color:#fdfdfd; text-align: center; vertical-align: middle;}
-.sq_gold  { display:table-cell; position:relative; margin:15px; background:rgba(200,155,55,0.5); color:#fdfdfd; text-align: center; vertical-align: middle;}
+.week_day_container { display:inline-block; position:relative; width:114px; margin:0px; }
+.week_day_line { display:block; position:relative; float:left;  text-align: center; width:114px;}
+.week_day_form { display:block; position:relative; float:left;  text-align: left; width:106px; margin:0 4px 0 4px;}
+
+.week_day_maps_line { display:inline-block; width:114px;}
+.week_day_map_square_container { display:table; position:relative; float:left; width:55px; height:55px; margin:1px; padding:0;} 
+.week_day_map_square { display:table-cell; text-align:center; vertical-align:middle; }
+.week_day_map_container { position:relative; display:inline; }
+   
+
+
+
+.sq_red   { display:table-cell; background:rgba(155,0,0,0.5); color:#fdfdfd; text-align: center; vertical-align: middle;}
+.sq_green { display:table-cell; background:rgba(0,100,0,0.5); color:#fdfdfd; text-align: center; vertical-align: middle;}
+.sq_blue  { display:table-cell; background:rgba(0,55,255,0.5); color:#fdfdfd; text-align: center; vertical-align: middle;}
+.sq_gold  { display:table-cell; background:rgba(200,155,55,0.5); color:#fdfdfd; text-align: center; vertical-align: middle;}
 .full-cell {position:absolute;top:0;left:0; height: 100%;width: 100%; z-index:4;}
-.today_bg {background-color:rgba(0,0,0,0.10); }
+.oddday_bg { background-color:rgba(50, 55, 55, 0.15); }
+.today_bg { border:1px solid #8c1922;}
 
 .Gold  { background:rgba(200,155,55,0.5); color:#fdfdfd ; }
-.Green { background:rgba(0,255,55,0.5);  color:#fdfdfd ; }
+.Green { background:rgba(0,100,0,0.5);  color:#fdfdfd ; }
 .Blue  { background:rgba(0,55,255,0.5); color:#fdfdfd ; }
 .Red   { background:rgba(155,0,0,0.5); color:#fdfdfd ; }
 
-.map_day_title { background-color:rgba(50, 55, 55, 0.5); font-family: guildText; font-size:20px; margin:0; border:0; }
+.map_day_title { background-color:rgba(50, 55, 55, 0.75); font-family: guildText; font-size:20px; margin:0; border:0; }
+
+input.week_day_raid_form { margin:5px 0 0 0; height:20px; background-color: transparent; border-style:solid; border-color:#606060; border-width:1px; border-style:none none solid none; font-family: guildText; color:#000000; font-size:16px; font-weight:bold; }
+select.week_day_raid_form {width:100px; height:20px; border-style:solid; border-color:#606060; border-width:1px; border-style:none none solid none; font-family: guildText; color:#000000; font-size:16px; background-color:transparent; }
+.time {  width:60px; text-align: right; }
+.number {width:30px; text-align: right; }
+
+div.week_bottom_line { position:relative; display:inline-block; float:left; margin:10px 0 10px 0;background-color:rgba(50, 55, 55, 0.15); height:25px; } 

@@ -15,11 +15,12 @@
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>. */
-	
+
+
 echo "<div id='Menu'>
 		<h5>".$lng[g__menu]."</h5>
 			<h6 style='margin-left:5px;'>";
-				$sql="SELECT d.$local AS module, m.page, m.user
+				$sql="SELECT d.$local AS module, m.page, m.date
 				FROM ".$gm_prefix."module AS m
 				LEFT JOIN ".$gm_prefix."dictionary AS d ON d.table_ID=m.module_ID AND d.entity_name='module' 
 				WHERE m.active=1 AND m.admin!=1
@@ -27,12 +28,12 @@ echo "<div id='Menu'>
 				$list=mysqli_query($con,$sql);
 				while($result=mysqli_fetch_array($list,MYSQLI_ASSOC))
 				{ echo "<a class='menu' href='".$result['page']; 
-				if($result['user']==1){echo "?user=".htmlentities($user->data['user_id'],ENT_QUOTES,"UTF-8");};
+				if($result['date']==1){echo "?date=".$date;};
 				echo "'>".$result['module']."</a><br />";};
 				
 				//Admin Menu / Menu admin
 				if (in_array($user->data['group_id'],$cfg_groups_backoffice))
-				{ $sql="SELECT d.$local AS module, m.page, m.user
+				{ $sql="SELECT d.$local AS module, m.page, m.date
 				FROM ".$gm_prefix."module AS m
 				LEFT JOIN ".$gm_prefix."dictionary AS d ON d.table_ID=m.module_ID AND d.entity_name='module' 
 				WHERE m.active=1 AND m.admin=1
@@ -40,7 +41,7 @@ echo "<div id='Menu'>
 				$list=mysqli_query($con,$sql);
 				while($result=mysqli_fetch_array($list,MYSQLI_ASSOC))
 				{ echo "<a class='menu' href='".$result['page']; 
-				if($result['user']==1){echo "?user=".htmlentities($user->data['user_id'],ENT_QUOTES,"UTF-8");};
+				if($result['date']==1){echo "?date=".$date;};
 				echo "'>".$result['module']."</a><br />";};};
 				
 				echo "

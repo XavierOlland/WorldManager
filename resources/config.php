@@ -44,6 +44,10 @@ $cfg_groups_member = array('5','8','9');
 //Backoffice (officer / officiers)
 $cfg_groups_backoffice = array('5','9');
 
+
+
+
+
 //Guild Manager display title / Titre affiché dans Guild Manager
 $cfg_title = 'World Manager';
 

@@ -16,14 +16,28 @@
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-//PHPBB connection / Connexion à phpBB
+//PHPBB connection / Connexion Ã  phpBB
 include('resources/phpBB_Connect.php');
 //GuildManager main configuration file / Fichier de configuration principal GuildManager
 include('resources/config.php');
 //Language management / Gestion des traductions
 include('resources/language.php');
 
-//Start of html page / Début du code html
+$user_id = $user->data['user_id'];
+
+$sql_user = "SELECT i.guild_ID, i.herald 
+     FROM ".$gm_prefix."userinfo AS i 
+     WHERE i.user_ID=$user_id";
+$list_user=mysqli_query($con,$sql_user);
+while($result_user=mysqli_fetch_row($list_user)) { 
+    $guild_id = $result_user[0]; 
+    $herald = $result_user[1]; 
+};
+$date = $_GET['date'];
+$date = date('Y-m-d', strtotime($date) );
+
+
+//Start of html page / DÃ©but du code html
 echo	"<html>
 <head>";
 	include('resources/php/FO_Head.php');
@@ -31,10 +45,10 @@ echo	"<html>
 </head>
 <body>
 	<div id='Main'>
-		<div id='Title'><h1>$cfg_title </h1></div>";
+		<div id='Title'><h1>$cfg_title</h1></div>";
 		//User permissions test / Test des permissions utilisateur
 		if (in_array($user->data['group_id'],$cfg_groups)){
-		//Registered user code / Code pour utilisateurs enregistrés
+		//Registered user code / Code pour utilisateurs enregistrÃ©s
 		echo "
 		<div id='Left'>";
 			include('resources/php/FO_Div_Menu.php');
@@ -42,19 +56,24 @@ echo	"<html>
 		echo "
 		</div>";
 		echo "
-		<div id='Page'>
+		<div id='Page'> 
 			<div id='CoreFull'>
-				<div class='Extand' id='Week'></div>
+				<div class='Extand' id='Week'>";
+					include('resources/php/FO_Div_Week.php');
+				echo "</div>
+				<div class='Extand' id='RaidForm' hidden>";
+					include('resources/php/FO_Div_Chantal.php');
+				echo "</div>
 				<div class='Extand' id='Result'></div>
 			</div>
 			<div id='Copyright'>".$lng[g__copyright]."</div>
 		</div>
 	</div>
-	<script>$('#Week').load(\"resources/php/FO_Div_Week.php\")</script>
+	
 	<script>var api_lng = '$api_lng'; var default_world_id = $api_srv</script>
 	<script src=\"resources/js/Menu_Match.js\"></script>  
 </body>
 </html>"; }
-//Non authorized user / utilisateur non autorisé
+//Non authorized user / utilisateur non autorisÃ©
 else { include('resources/php/FO_Div_Register.php'); }
 ?>

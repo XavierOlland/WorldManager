@@ -23,7 +23,7 @@ echo "<meta charset=\"UTF-8\">
 <link rel='stylesheet' type='text/css' href='resources/js/jquery-ui.custom.css'>
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>       
 <script src='resources/js/jquery-ui.js'></script>
- <script src='resources/js/jquery.tablesorter.js'></script>	 
+<script src='resources/js/jquery.mask.min.js'></script>	 
 ";
 
 ?>

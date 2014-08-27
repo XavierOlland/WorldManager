@@ -39,7 +39,7 @@ $current_month = date('m', time() );
 $current_year = date('Y', time() );
 
 
-echo "<h3>$title</h3>" ;
+echo "<h3>$title<br/></h3>" ;
 
 //maps
 $sql_map = "SELECT d.$local AS map, p.text_ID, p.param_ID, p.color
@@ -49,7 +49,7 @@ $sql_map = "SELECT d.$local AS map, p.text_ID, p.param_ID, p.color
       $list_map=mysqli_query($con,$sql_map);
       while($result_map=mysqli_fetch_array($list_map))
       {  echo "<div class='map_day_title' style='float: left;height:26px;color:".$result_map[color]."'>
-            <div style='float:left;width:390px;height:22px;margin:0;padding:4px 0 0px 5px;'>".$result_map[map]."</div>
+            <div style='float:left;width:380px;height:22px;margin:0;padding:4px 0 0px 5px;'>".$result_map[map]."</div>
             <div style='float:left;width:60px;height:22px;margin:0;padding:4px 0 0px 0;'>19h</div>
             <div style='float:left;width:60px;height:22px;margin:0;padding:4px 0 0px 0;'></div>
             <div style='float:left;width:60px;height:22px;margin:0;padding:4px 0 0px 0;'>21h</div>
@@ -73,16 +73,16 @@ $sql_map = "SELECT d.$local AS map, p.text_ID, p.param_ID, p.color
             echo "<div style='float: left;padding:3px 0 1px 10px;'>
                     <div  style='float: left;width:20px;height:20px;margin:0;padding:0;'><img src='resources/theme/$theme/images/".$result_raid[type]."_Icon.png'></div>
                     <div  style='float: left;width:60px;height:20px;margin:0;padding:0;text-align:center;'><a class='table' href='FO_Main_Guild?guild_ID=".$result_raid[guild_ID]."'>".$result_raid[tag]."</a></div>
-                    <div  style='float: left;width:275px;height:20px;margin:0;padding:0;'>".$result_raid[name]."</div>
+                    <div  style='float: left;width:265px;height:20px;margin:0;padding:0;'>".$result_raid[name]."</div>
                     <div  style='float: left;width:25px;height:20px;margin:0;padding:0;text-align:right;'>".$result_raid[strength]."</div>
                     <div  style='float: left;width:420px;height:20px;'>
                         <div class='".$result_map[text_ID]."' style='width:".$result_raid[length]."px;margin-left:".$result_raid[startPadding]."px'>&nbsp;</div>
                     </div>
                 </div></br>"; 
          $counter_strength = $counter_strength + $result_raid[strength]; } ;
-         echo "<div style='float: left;margin:0px 0 15px 10px;background-color:rgba(50, 55, 55, 0.15);'>
-                    <div  style='float: left;width:60px;height:20px;margin:0;padding:0;'></div>
-                    <div  style='float: left;width:295px;height:20px;margin:0;padding:0;text-align:right;'>Total : </div>
+         echo "<div style='float: left;margin:0 0 15px 0; padding:0 5px 0 0;  background-color:rgba(50, 55, 55, 0.15);'>
+                    <div  style='float: left;width:70px;height:20px;margin:0;padding:0;'></div>
+                    <div  style='float: left;width:285px;height:20px;margin:0;padding:0;text-align:right;'>Total : </div>
                     <div  style='float: left;width:25px;height:20px;margin:0;padding:0;text-align:right;'>$counter_strength</div>
                     <div  style='float: left;width:420px;height:20px;'></div>
                 </div>" ; 

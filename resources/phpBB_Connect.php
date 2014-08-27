@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 /*  Guild Manager has been designed to help Guild Wars 2 (and other MMOs) guilds to organize themselves for PvP battles.
     Copyright (C) 2013  Xavier Olland
 
