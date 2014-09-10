@@ -39,7 +39,8 @@ for($day_count=0; $day_count<7; $day_count++ ){
   echo "'>";
   $sql_raid = "SELECT IFNULL(r.strength,0) AS test, r.strength,
      IFNULL(DATE_FORMAT(r.startRaid,'%H:%i'),'20:30') AS startRaid,
-     IFNULL(DATE_FORMAT(r.endRaid,'%H:%i'),'23:30') AS endRaid
+     IFNULL(DATE_FORMAT(r.endRaid,'%H:%i'),'23:30') AS endRaid,
+     r.param_ID_map AS guild_map
      FROM ".$gm_prefix."guild AS g 
      LEFT JOIN ".$gm_prefix."raid AS r ON r.guild_ID=g.guild_ID AND r.dateRaid='$day'
      WHERE g.guild_ID=$guild_id";
@@ -57,14 +58,17 @@ for($day_count=0; $day_count<7; $day_count++ ){
           WHERE TYPE = 'map' ORDER BY p.param_ID";
         $list_map=mysqli_query($con,$sql_map);
         while($result_map=mysqli_fetch_array($list_map)){ 
-          echo "<option style='color:".$result_map[color]."' value='".$result_map[param_ID]."'>".$result_map[value]."</option>";
+          echo "<option style='color:".$result_map[color]."' value='".$result_map[param_ID]."'";
+          if ( $result_map[param_ID] == $result_raid[guild_map] ) { echo "selected"; }
+          echo ">".$result_map[value]."</option>";
         };
         echo "</select></p><p style='text-align:right'>
         Effectif : <input class='week_day_raid_form number' name='strength$day' type='text' min='1' value='".$result_raid[strength]."'><br/>
         De : <input class='week_day_raid_form time' name='startRaid$day' type='text' value='".$result_raid[startRaid]."'><br/>
         à : <input class='week_day_raid_form time' name='endRaid$day' type='text' value='".$result_raid[endRaid]."'><br/><br/>
         </p>
-        <p><input type='checkbox' name='check$day' checked>MàJ <input type='checkbox' name='delete$day'>Suppr.</p>     
+        <p><input type='checkbox' name='check$day' checked>MàJ</p> 
+        <p><input type='checkbox' name='delete$day'>Suppr.</p>     
     </div>" ; 
   };  
   echo "</div>";

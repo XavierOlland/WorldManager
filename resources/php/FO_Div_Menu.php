@@ -15,7 +15,7 @@
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>. */
-
+$page_date = date('Y-m-d', time() );
 
 echo "<div id='Menu'>
 		<h5>".$lng[g__menu]."</h5>
@@ -28,7 +28,7 @@ echo "<div id='Menu'>
 				$list=mysqli_query($con,$sql);
 				while($result=mysqli_fetch_array($list,MYSQLI_ASSOC))
 				{ echo "<a class='menu' href='".$result['page']; 
-				if($result['date']==1){echo "?date=".$date;};
+				if($result['date']==1){echo "?date=".$page_date;};
 				echo "'>".$result['module']."</a><br />";};
 				
 				//Admin Menu / Menu admin
@@ -41,7 +41,7 @@ echo "<div id='Menu'>
 				$list=mysqli_query($con,$sql);
 				while($result=mysqli_fetch_array($list,MYSQLI_ASSOC))
 				{ echo "<a class='menu' href='".$result['page']; 
-				if($result['date']==1){echo "?date=".$date;};
+				if($result['date']==1){echo "?date=".$page_date;};
 				echo "'>".$result['module']."</a><br />";};};
 				
 				echo "
