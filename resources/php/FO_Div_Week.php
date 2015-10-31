@@ -33,6 +33,7 @@ $current_year = date('Y', time() );
 
 //day correction
 $sql = "SELECT DATE_ADD('$today', INTERVAL - value DAY) FROM ".$gm_prefix."param  WHERE TYPE = 'day' AND complement=$current_day";
+echo $sql;
 $list=mysqli_query($con,$sql);
 while($result=mysqli_fetch_row($list)) { $start_day = $result[0]; $start_day1 = $start_day;};
 

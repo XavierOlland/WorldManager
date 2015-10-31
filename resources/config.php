@@ -40,11 +40,17 @@ $api_lng = substr($local, 0, 2 );
 //Read only
 $cfg_groups = array('1','5','8','9');
 //Standard (members / membres)
-$cfg_groups_member = array('5','8','9');
+$cfg_groups_herald = array('5','8','9');
 //Backoffice (officer / officiers)
 $cfg_groups_backoffice = array('5','9');
 
+$user_id = $user->data['user_id'];
 
+$sql_user = "SELECT i.guild_ID FROM ".$gm_prefix."userinfo AS i WHERE i.user_ID=$user_id";
+$list_user=mysqli_query($con,$sql_user);
+while($result_user=mysqli_fetch_row($list_user)) { 
+    $guild_id = $result_user[0]; 
+};
 
 
 

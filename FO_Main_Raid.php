@@ -1,6 +1,6 @@
 <?php
-/*  Guild Manager v0.1.0 ()
-	Guild Manager has been designed to help Guild Wars 2 (and other MMOs) guilds to organize themselves for PvP battles.
+/*  World Manager v0.1.0 ()
+	World Manager has been designed to help Guild Wars 2 (and other MMOs) guilds to organize themselves for PvP battles.
     Copyright (C) 2013  Xavier Olland
 
     This program is free software: you can redistribute it and/or modify

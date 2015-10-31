@@ -1,6 +1,6 @@
 <?php 
-/*  Guild Manager v0.1.0 ()
-	Guild Manager has been designed to help Guild Wars 2 (and other MMOs) guilds to organize themselves for PvP battles.
+/*  World Manager v0.1.0 ()
+  World Manager has been designed to help Guild Wars 2 (and other MMOs) guilds to organize themselves for PvP battles.
     Copyright (C) 2013  Xavier Olland
 
     This program is free software: you can redistribute it and/or modify
@@ -23,17 +23,11 @@ include('resources/config.php');
 //Language management / Gestion des traductions
 include('resources/language.php');
 
-$user_id = $user->data['user_id'];
 
-$sql_user = "SELECT i.guild_ID, i.herald 
-     FROM ".$gm_prefix."userinfo AS i 
-     WHERE i.user_ID=$user_id";
-$list_user=mysqli_query($con,$sql_user);
-while($result_user=mysqli_fetch_row($list_user)) { 
-    $guild_id = $result_user[0]; 
-    $herald = $result_user[1]; 
-};
+
+
 $date = $_GET['date'];
+if(strlen($date)==0){ $date = date('Y-m-d', time() );};
 $date = strtotime($date);
 $today = date('Y-m-d', $date );
 $current_day = date('w', time() );
@@ -47,27 +41,27 @@ $list=mysqli_query($con,$sql);
 while($result=mysqli_fetch_row($list)) { $start_day = $result[0]; $start_day1 = $start_day;};
 $day = date('Y-m-d', strtotime( $start_day ) );
 //Start of html page / Début du code html
-echo	"<html>
+echo  "<html>
 <head>";
-	include('resources/php/FO_Head.php');
-	echo "
+  include('resources/php/FO_Head.php');
+  echo "
 </head>
 <body>
-	<div id='Main'>
-		<div id='Title'><h1>$cfg_title</h1></div>";
-		//User permissions test / Test des permissions utilisateur
-		if (in_array($user->data['group_id'],$cfg_groups)){
-		//Registered user code / Code pour utilisateurs enregistrés
-		echo "
-		<div id='Left'>";
-			include('resources/php/FO_Div_Menu.php');
-			include('resources/php/FO_Div_Match.php');		
-			echo "
-		</div>";
-		echo "
-		<div id='Page'> 
-			<div id='CoreFull'>
-				<div class='Extand' id='Week'>";
+  <div id='Main'>
+    <div id='Title'><h1>$cfg_title</h1></div>";
+    //User permissions test / Test des permissions utilisateur
+    if (in_array($user->data['group_id'],$cfg_groups)){
+    //Registered user code / Code pour utilisateurs enregistrés
+    echo "
+    <div id='Left'>";
+      include('resources/php/FO_Div_Menu.php');
+      include('resources/php/FO_Div_Match.php');    
+      echo "
+    </div>";
+    echo "
+    <div id='Page'> 
+      <div id='CoreFull'>
+        <div class='Extand' id='Week'>";
 
 
 //Week display
@@ -82,7 +76,7 @@ echo "<h3>Semaine $current_week</h3>";
        $sql = "SELECT d.$local
      FROM ".$gm_prefix."param AS p 
      LEFT JOIN ".$gm_prefix."dictionary AS d ON d.table_ID=p.param_ID AND d.entity_name='param' 
-     WHERE TYPE = 'day' AND p.value=$day_count
+     WHERE p.TYPE = 'day' AND p.value=$day_count
      ORDER BY p.value";
       $list=mysqli_query($con,$sql);
       while($result=mysqli_fetch_row($list)) 
@@ -93,7 +87,7 @@ echo "<h3>Semaine $current_week</h3>";
       $counter_strength = 0;
       $sql_strength = "SELECT IFNULL(MAX(a.strength),0) FROM (SELECT IFNULL(SUM(r.strength),0) AS strength FROM ".$gm_prefix."raid AS r GROUP BY param_ID_map) AS a";
       $list_strength = mysqli_query($con,$sql_strength);
-      while($result_strength=mysqli_fetch_row($list_strength)){ $total_strength = $result_strength[0];};
+      while($result_strength=mysqli_fetch_row($list_strength)){ $total_strength = $result_strength[0]; if($total_strength == 0){$total_strength = 1;}; };
       
       $sql_map = "SELECT p.param_ID, p.text_ID, 
                   (SELECT IFNULL(SUM(r.strength),0) FROM ".$gm_prefix."raid AS r WHERE r.param_ID_map = p.param_ID AND r.dateRaid = '$start_day1') AS strength
@@ -123,18 +117,16 @@ echo "<h3>Semaine $current_week</h3>";
     };
       
   echo "<div class='week_bottom_line' style='width:605px;'><p><img src='resources/theme/$theme/images/upperReturn.png'> Cliquez sur un jour pour en voir le détail.</p></div>";
-  if ( $herald == 1 ) { 
+  if (in_array($user->data['group_id'],$cfg_groups_herald) && strlen($guild_id)>0){ 
     echo "<div id='adminLink'  class='week_bottom_line' style='width:200px;text-align:right'><a class='menu' href=\"javascript:void(0)\" onclick=\"raidFormShow()\">".$lng['g__adminPanel']."</a></div>";
   }
   else {
     echo "<div id='adminLink'  class='week_bottom_line' style='width:200px;text-align:right'></div>";
   };
 
-					
-				echo "</div>
-				<div class='Extand' id='RaidForm' hidden>";
-
-
+          
+        echo "</div>
+        <div class='Extand' id='RaidForm' hidden>";
 //Forms
 echo "<form name='raids' id='raids' method='POST' action=''>";
 for($day_count=0; $day_count<7; $day_count++ ){
@@ -149,7 +141,6 @@ for($day_count=0; $day_count<7; $day_count++ ){
      FROM ".$gm_prefix."guild AS g 
      LEFT JOIN ".$gm_prefix."raid AS r ON r.guild_ID=g.guild_ID AND r.dateRaid='$day'
      WHERE g.guild_ID=$guild_id";
-
   $list_raid=mysqli_query($con,$sql_raid);
   while($result_raid=mysqli_fetch_array($list_raid)) {
     echo "    
@@ -180,20 +171,20 @@ for($day_count=0; $day_count<7; $day_count++ ){
   echo "</div>";
   $day = date_create($day);
   $day = date_format(date_add( $day , date_interval_create_from_date_string("1 day")), 'Y-m-d');   
-};		echo "
+};    echo "
   <p style='margin:10px 0 20px 0;background-color:rgba(50, 55, 55, 0.15);text-align:right;'>
   <input type='submit' name='submit_val' value='Mettre à jour'> les raids sélectionnés </p>
   </form>";
-				echo "</div>
-				<div class='Extand' id='Result'></div>
-			</div>
-			<div id='Copyright'>".$lng[g__copyright]."</div>
-		</div>
-	</div>
-	<script>function raidFormShow(){ $('#RaidForm').toggle('blind')}</script>
-	<script>$(function(){ $('.time').mask('00:00');$('.number').mask('099');})</script>
-	<script>var api_lng = '$api_lng'; var default_world_id = $api_srv</script>
-	<script src=\"resources/js/Menu_Match.js\"></script>  
+        echo "</div>
+        <div class='Extand' id='Result'></div>
+      </div>
+      <div id='Copyright'>".$lng[g__copyright]."</div>
+    </div>
+  </div>
+  <script>function raidFormShow(){ $('#RaidForm').toggle('blind')}</script>
+  <script>$(function(){ $('.time').mask('00:00');$('.number').mask('099');})</script>
+  <script>var api_lng = '$api_lng'; var default_world_id = $api_srv</script>
+  <script src=\"resources/js/Menu_Match.js\"></script>  
 </body>
 </html>"; 
 if (isset($_POST['submit_val'])) {

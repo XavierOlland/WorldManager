@@ -52,30 +52,18 @@ echo "</head>
 		</div>";
 		echo "
 		<div id='Page'>
-			<div id='CoreFull'>
-				<h2>".$lng[p_FO_Main_GuildList_h2_1]."</h2>
-				<table id='userList' class='tablesorter'>
-				<thead>
-					<tr>
-						<th>".$lng[t_guild_name]."</th>
-						<th>".$lng[t_guild_tag]."</th>
-						<th>".$lng[t_guild_strength]."</th>
-						<th>".$lng[g__herald]."</th>
-					</tr>
-					</thead>
-				
-				<tbody>";
+			<div id='CoreFull'>";
 					$sqlg="SELECT name, tag, strength
-					FROM ".$gm_prefix."guild AS g" ; 
+					FROM ".$gm_prefix."guild AS g
+					WHERE guild_ID = $guild_id" ; 
 					$listg=mysqli_query($con,$sqlg);
 					while($resultg=mysqli_fetch_array($listg,MYSQLI_ASSOC))
 					{ echo "
-					<tr>
-						<td>".$resultg['name']."</td>
-						<td>[".$resultg['tag']."]</td>
-						<td class='right'>".$resultg['strength']."</td>
-						<td></td>
-					</tr>";
+				<h2>".$resultg['name']."</h2><br/>
+				".$lng[t_guild_name]." : <input class='guild_form' type='text' value=\"".$resultg['name']."\" /><br />
+				".$lng[t_guild_tag]." : <input class='guild_form' type='text' value=\"".$resultg['tag']."\" /><br />
+				".$lng[t_guild_strength]." : <input class='guild_form' type='number' value=\"".$resultg['strength']."\" /><br />
+				".$lng[t_guild_strengthText]." : <input class='guild_form' type='text' value=\"".$resultg['strengthText']."\" /><br />";
 					};
 					echo "</tbody>
 					</table>
